@@ -49,7 +49,7 @@ var qBankAnswer = ["1", "2", "3", "2"];
   
 /* Global variables */
 var counter = 0;
-var time = 60;
+var time = 5;
 var intervalId;
   
 
@@ -61,19 +61,41 @@ function run() {
     $('#quiz').append(displayTime);
 }
 
+// Countdown, when time runs out
 function decrement() {
     time--;
     $('.count').text("Remaining time: " + time);
     if(time === 0) {
         stop();
         timeUp();
+        feedbackDisplay();
     }
 }
 
+// Stop clock
 function stop() {
 clearInterval(intervalId);
 }
-  
+
+// Display #incorrect and #correct
+function feedbackDisplay () {
+    if (counter === 2) {
+        $('#quiz').append('<h2> Answered correctly: 2</h2>');
+        $('#quiz').append('<h2> Answered incorrectly: 2</h2>');
+      } else if (counter === 1) {
+        $('#quiz').append('<h2> Answered correctly: 1</h2>');
+        $('#quiz').append('<h2> Answered incorrectly: 3</h2>');
+      } else if (counter === 3) {
+        $('#quiz').append('<h2> Answered correctly: 3</h2>');
+        $('#quiz').append('<h2> Answered incorrectly: 1</h2>');
+      } else if (counter === 4) {
+        $('#quiz').append('<h2> Answered correctly: 4</h2>');
+        $('#quiz').append('<h2> Answered incorrectly: 0</h2>');
+      } else {
+        $('#quiz').append('<h2> Answered correctly: 0</h2>');
+        $('#quiz').append('<h2> Answered incorrectly: 4</h2>');
+      }
+}
 
 // If time runs out
 function timeUp() {
@@ -98,6 +120,7 @@ function timeUp() {
     $('#submitButton').css('display', 'none');
     $('#quiz').html("<h1> Your score is: " + score + "%</h1>");
     }
+
     
 
 /* When start button is clicked */
@@ -148,23 +171,8 @@ $('#start').on('click', function() {
         $('#submitButton').css('display', 'none');
         $('#quiz').html('<h1> Your score is: ' + score + '%</h1>');
 
-        // #Incorrect & #correct displayed
-        if (counter === 2) {
-          $('#quiz').append('<h2> Answered correctly: 2</h2>');
-          $('#quiz').append('<h2> Answered incorrectly: 1</h2>');
-        } else if (counter === 1) {
-          $('#quiz').append('<h2> Answered correctly: 1</h2>');
-          $('#quiz').append('<h2> Answered incorrectly: 2</h2>');
-        } else if (counter === 3) {
-          $('#quiz').append('<h2> Answered correctly: 3</h2>');
-          $('#quiz').append('<h2> Answered incorrectly: 0</h2>');
-        } else {
-          $('#quiz').append('<h2> Answered correctly: 0</h2>');
-          $('#quiz').append('<h2> Answered incorrectly: 3</h2>');
-        }
+        feedbackDisplay();
   
     });
     
 });
-  
-  
