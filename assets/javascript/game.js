@@ -49,7 +49,7 @@ var qBankAnswer = ["1", "2", "3", "2"];
   
 /* Global variables */
 var counter = 0;
-var time = 5;
+var time = 45;
 var intervalId;
   
 
