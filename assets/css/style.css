@@ -1,0 +1,35 @@
+/* Background image */
+body, html {
+    height: 100%;
+}
+
+.bg { 
+    background-image: url("https://www.methodshop.com/wp-content/uploads/oregon-trail-feature.png");
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}                    
+
+/* Quiz questions */
+.test {
+  margin: 15px;
+}
+
+/* Jumbotron */
+.jumbotron {
+  background: black;
+  width: 85%;
+  margin: 0 auto;
+  height: auto;
+  padding: 30px;
+}
+
+/* Quiz body */
+#quiz {
+  margin: 0 auto;
+  text-align: center;
+  color: #1cbe21;
+  font-family: 'VT323', monospace;
+}
+

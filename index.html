@@ -5,47 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" /> -->
-    <!-- <script src="assets/javascript/app.js"></script> -->
     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:700|VT323" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 <style>
 
-body, html {
-    height: 100%;
-}
-.bg { 
-    /* The image used */
-    background-image: url("https://www.methodshop.com/wp-content/uploads/oregon-trail-feature.png");
-
-    /* Full height */
-    height: 100%; 
-
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}                    
-                    
-
-.test {
-  margin: 15px;
-}
-
-.jumbotron {
-  background: black;
-  width: 85%;
-  margin: 0 auto;
-  height: auto;
-  padding: 30px;
-}
-
-#quiz {
-  margin: 0 auto;
-  color: #1cbe21;
-  font-family: 'VT323', monospace;
-  margin: 0 auto;
-}
 
 </style>
 
@@ -61,7 +25,6 @@ body, html {
       <div class="jumbotron">
         <div class="col-md-11" id="quiz">
             <h2>Oregon Trail According to History But Mostly the Videogame</h2>
-            <br>
             <button id="start">Start</button>
         </div>
       </div>
@@ -69,175 +32,7 @@ body, html {
   </div>
   
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript">
-
-
-var qBank = [
-  {
-    question: "1. According to the Oregon Trail Game, what was the most deadly disease during the journey West?",
-    choices: {
-      a: "dysentery ",
-      b: "measles ",
-      c: "scarlet fever ",
-      d: "pneumonia "
-    },
-    answer: "a"
-  },
-  {
-    question: "2. According to actual history, what Native American tribe did Sacagawea belong to?",
-    choices: {
-      a: "Shawnee ",
-      b: "Shoshone ",
-      c: "Sioux ",
-      d: "Arikara "
-    },
-    answer: "b"
-  },
-  {
-    question: "3. In the Oregon Trail Game, which profession was NOT an option to choose from for your character?",
-    choices: {
-      a: "Banker from Boston",
-      b: "Carpenter from Ohio",
-      c: "Salesperson from New York",
-      d: "Farmer from Illinois"
-    },
-    answer: "c"
-  },
-  {
-    question: "4. In the game, if one of your party members dies, what can be found at their site of death in following playthroughs?",
-    choices: {
-      a: "Flowers",
-      b: "Gravestone",
-      c: "Make-shift burial mound",
-      d: "The ghost of your party member"
-    },
-    answer: "b"
-  }
-];
-
-var qBankAnswer = ["1", "2", "3", "2"];
-
-var counter = 0;
-var time = 60;
-var intervalId;
-
-
-
-function run() {
-  intervalId = setInterval(decrement, 1000);
-  var displayTime = $("<h3>");
-  displayTime.addClass("count");
-  $('#quiz').append(displayTime);
-}
-
-function decrement() {
-  time--;
-  $('.count').text("Remaining time: " + time);
-  if(time === 0) {
-    stop();
-    timeUp();
-  }
-}
-
-function stop() {
-  clearInterval(intervalId);
-}
-
-function timeUp() {
-  var userAnswers = $('.test');
-  var checked = [];
-  for (var i = 0; i < userAnswers.length; i++) {
-    if (userAnswers[i].checked) {
-      checked.push(userAnswers[i].value);
-    }
-  }
-  console.log(checked);
-  for (var i = 0; i < checked.length; i++) {
-    if (checked[i] !== qBankAnswer[i]) {
-
-    } else if (checked[i] === qBankAnswer[i]) {
-      counter++;
-    }
-  }
-  console.log(counter);
-  var score = Math.round(counter / qBankAnswer.length * 100);
-  console.log(score);
-  $('#submitButton').css('display', 'none');
-  $('#quiz').html("<h1> Your score is: " + score + "%</h1>");
-}
-
-// Rendering display
-$('#start').on('click', function() {
-  run();
-
-  // Remove start button, display questions
-  $('#start').css('display', 'none');
-  for (var i = 0; i < qBank.length; i++) {
-    $('#quiz').append('<h4>' + qBank[i].question + "</h4>");
-    $("#quiz").append("<input type='radio' class='test' value='1' name='question" + i + "'" + "/>" + qBank[i].choices.a);
-    $("#quiz").append("<input type='radio' class='test' value='2' name='question" + i + "'" + "/>" + qBank[i].choices.b);
-    $("#quiz").append("<input type='radio' class='test' value='3' name='question" + i + "'" + "/>" + qBank[i].choices.c);
-    $("#quiz").append("<input type='radio' class='test' value='4' name='question" + i + "'" + "/>" + qBank[i].choices.d);
-  }
-  
-  var submit = $('<input>').attr(
-    {
-      type: 'button', 
-      id: 'submitButton', 
-      value: 'submit'
-    }
-  );
-
-  $('#quiz').append('<br><br>');
-  $('#quiz').append(submit);
-  console.log(submit);
-
-    $('#submitButton').on('click', function() {
-      var userAnswers = $('.test');
-      var checked = [];
-      for (var i = 0; i < userAnswers.length; i++) {
-        if (userAnswers[i].checked) {
-          checked.push(userAnswers[i].value)
-        }
-      }
-      console.log(checked);
-      for (var i = 0; i < checked.length; i++) {
-        if (checked[i] !== qBankAnswer[i]) {
-        } else if (checked[i] === qBankAnswer[i]) {
-          counter++;
-        }
-      }
-
-      console.log(counter);
-
-      var score = Math.round(counter / qBankAnswer.length * 100);
-      console.log(score);
-      
-      $('#submitButton').css('display', 'none');
-      $('#quiz').html('<h1> Your score is: ' + score + '%</h1>');
-      if (counter === 2) {
-        $('#quiz').append('<h2> Answered correctly: 2</h2>');
-        $('#quiz').append('<h2> Answered incorrectly: 1</h2>');
-      } else if (counter === 1) {
-        $('#quiz').append('<h2> Answered correctly: 1</h2>');
-        $('#quiz').append('<h2> Answered incorrectly: 2</h2>');
-      } else if (counter === 3) {
-        $('#quiz').append('<h2> Answered correctly: 3</h2>');
-        $('#quiz').append('<h2> Answered incorrectly: 0</h2>');
-      } else {
-        $('#quiz').append('<h2> Answered correctly: 0</h2>');
-        $('#quiz').append('<h2> Answered incorrectly: 3</h2>');
-      }
-
-
-    });
-
-
-});
-
-
-
-  </script>
+  <script src="assets/javascript/game.js"></script>
 
     
 </body>
